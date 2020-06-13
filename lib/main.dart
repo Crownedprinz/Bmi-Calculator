@@ -1,6 +1,9 @@
+import 'package:bmi_calculator/components/round-button.dart';
 import 'package:bmi_calculator/results.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+
+import 'Calculator.dart';
 
 enum Gender {
   male,
@@ -104,7 +107,7 @@ class _InputPageState extends State<InputPage> {
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: <Widget>[
                       Text(
-                        '183',
+                        height.toString(),
                         style: kNumberTextStyle,
                       ),
                       Text(
@@ -157,7 +160,7 @@ class _InputPageState extends State<InputPage> {
                               color: Color(0xFF8D8E98),),
                         ),
                         Text(
-                          '74',
+                          weight.toString(),
                           style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
@@ -166,28 +169,24 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            ClipOval(
-                              child: Container(
-                                color: Color(0xFF4C4F5E),
-                                height: 60.0, // height of the button
-                                width: 60.0,
-                                child: Icon(
-                                  FontAwesomeIcons.minus,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            RoundButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: (){
+                                setState(
+                                        () {
+                                      weight--;
+                                    });
+                              },
                             ),
-                            ClipOval(
-                              child: Container(
-                                color: Color(0xFF4C4F5E),
-                                height: 60.0, // height of the button
-                                width: 60.0,
-                                child: Icon(
-                                  FontAwesomeIcons.plus,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
+                            RoundButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: (){
+                                setState(
+                                        () {
+                                      weight++;
+                                    });
+                              },
+                            ),
                           ],
                         )
                       ],
@@ -207,7 +206,7 @@ class _InputPageState extends State<InputPage> {
                               color: Color(0xFF8D8E98)),
                         ),
                         Text(
-                          '19',
+                          age.toString(),
                           style: TextStyle(
                               fontSize: 40,
                               fontWeight: FontWeight.bold,
@@ -216,28 +215,24 @@ class _InputPageState extends State<InputPage> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: <Widget>[
-                            ClipOval(
-                              child: Container(
-                                color: Color(0xFF4C4F5E),
-                                height: 60.0, // height of the button
-                                width: 60.0,
-                                child: Icon(
-                                  FontAwesomeIcons.minus,
-                                  color: Colors.white,
-                                ),
-                              ),
+                            RoundButton(
+                              icon: FontAwesomeIcons.minus,
+                              onPressed: (){
+                                setState(
+                                        () {
+                                      age--;
+                                    });
+                              },
                             ),
-                            ClipOval(
-                              child: Container(
-                                color: Color(0xFF4C4F5E),
-                                height: 60.0, // height of the button
-                                width: 60.0,
-                                child: Icon(
-                                  FontAwesomeIcons.plus,
-                                  color: Colors.white,
-                                ),
-                              ),
-                            )
+                            RoundButton(
+                              icon: FontAwesomeIcons.plus,
+                              onPressed: (){
+                                setState(
+                                        () {
+                                      age++;
+                                    });
+                              },
+                            ),
                           ],
                         )
                       ],
@@ -249,9 +244,15 @@ class _InputPageState extends State<InputPage> {
           ),
           GestureDetector(
             onTap: (){
+              Calculator calc =
+              Calculator(height: height, weight: weight);
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => ResultView()),
+                MaterialPageRoute(builder: (context) => ResultView(
+                   calc.calculateBMI(),
+                  calc.getResult(),
+                  calc.getInterpretation(),
+                )),
               );
             },
             child: Container(

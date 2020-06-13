@@ -3,6 +3,10 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class ResultView extends StatelessWidget {
+  ResultView(this.bmi,this.bmiResult,this.bmIntepretation );
+  final String bmi;
+  final String bmiResult;
+  final String bmIntepretation;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,7 +48,7 @@ class ResultView extends StatelessWidget {
                       ),
                     ),
                     Text(
-                      " 22.1",
+                      bmi.toString(),
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 100.0,
@@ -76,12 +80,14 @@ class ResultView extends StatelessWidget {
                         ],
                       ),
                     ),
-                    Text("You have a normal body weight. Good job!",
+                    Text(
+                        bmIntepretation.toString(),
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.white,
                           fontSize: 22.0,
                         )),
+
                     Container(
                       child: Text(
                         'SAVE RESULT',
@@ -100,22 +106,46 @@ class ResultView extends StatelessWidget {
               ),
             ),
             Expanded(
-                child: Container(
-              child: Center(
-                child: Text(
-                  "RE-CALCULATE YOUR BMI",
-                  style: TextStyle(
-                    fontSize: 25.0,
-                    fontWeight: FontWeight.bold,
+                child:
+                GestureDetector(
+                  onTap: (){
+                    Navigator.pop(context);
+                  },
+                  child: Container(
+                    child: Center(
+                      child: Text(
+                        "RE-CALCULATE YOUR BMI",
+                        style: TextStyle(
+                          fontSize: 25.0,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    color: Color(0xFFEB1555),
+                    margin: EdgeInsets.only(top: 10.0),
+                    padding: EdgeInsets.only(bottom: 20.0),
+                    width: double.infinity,
+                    height: 80.0,
+                    alignment: Alignment.center,
                   ),
-                ),
-              ),
-              color: Color(0xFFEB1555),
-              margin: EdgeInsets.only(top: 10.0),
-              padding: EdgeInsets.only(bottom: 20.0),
-              width: double.infinity,
-              height: 80.0,
-            )),
+                )),
+
+//                Container(
+//              child: Center(
+//                child: Text(
+//                  "RE-CALCULATE YOUR BMI",
+//                  style: TextStyle(
+//                    fontSize: 25.0,
+//                    fontWeight: FontWeight.bold,
+//                  ),
+//                ),
+//              ),
+//              color: Color(0xFFEB1555),
+//              margin: EdgeInsets.only(top: 10.0),
+//              padding: EdgeInsets.only(bottom: 20.0),
+//              width: double.infinity,
+//              height: 80.0,
+//            )),
           ],
         ),
       ),
